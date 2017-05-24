@@ -43,6 +43,11 @@ when isMainModule:
     "http://ip.42.pl/raw",
     "https://duckduckgo.com/?q=whats+my+ip&ia=answer",
   ]
-  echo getExternalIP(sites)
+  let ip = getExternalIP(sites)
+  echo ip
+
+  while true:
+    let inp = readLine(stdin)
+    echo waitFor checkSites(@[inp])
 
 
