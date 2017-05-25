@@ -12,7 +12,6 @@ proc checkSites(sites: seq[string]): Future[seq[seq[string]]] {.async.} =
     buf = await client.getContent(site)
     try:
       result.add(toSeq(buf.parseIps()))
-    # except Exception as exp:
     except:
       echo "broken: ", site
 
