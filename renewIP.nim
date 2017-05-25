@@ -27,7 +27,7 @@ proc getIdByName(name: string): string =
       return entry["id"].getStr()
 
 proc printDnsRecords() =
-  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body #,  body = $body)
+  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body)
   let j = parseJson(body)
   # return j["result"]
   for site in j["result"]:
@@ -46,7 +46,7 @@ proc renewIP(name, id, ip: string) =
   }
  
   discard repr client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records/" & id, httpMethod = HttpPut, body = $body)
-  # TODO: Check if update succesful
+  # TODO: Check if update succesful ;)
 
 when isMainModule:
   var sites: seq[string] = @[]
