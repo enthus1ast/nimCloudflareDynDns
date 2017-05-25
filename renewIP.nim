@@ -27,7 +27,7 @@ proc getIdByName(name: string): string =
       return entry["id"].getStr()
 
 proc printDnsRecords() =
-  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body)
+  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body
   let j = parseJson(body)
   # return j["result"]
   for site in j["result"]:
