@@ -17,7 +17,7 @@ fill the config
 	email = "your@email.example"
 	apiKey = "yourCloudflareApiKey"
 	zoneKey = "yourZoneId"
-	site = "server.yoursite.example"
+	domains = "server.yoursite.example,another.yoursite.example"
 ```
 
 if you like extend the sites.txt list with your favourite ip resolver sites.
