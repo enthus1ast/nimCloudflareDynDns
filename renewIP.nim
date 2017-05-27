@@ -8,7 +8,7 @@ var config = loadConfig("conf.ini")
 let email = config.getSectionValue("", "email") 
 let apiKey = config.getSectionValue("", "apiKey") 
 let zoneKey = config.getSectionValue("", "zoneKey") 
-let site = config.getSectionValue("", "site") 
+let domains = config.getSectionValue("", "domains").split(",") 
 
 let client = newHttpClient()
 client.headers = newHttpHeaders({ 
@@ -58,8 +58,10 @@ when isMainModule:
   let ip = getExternalIP(sites)
   echo "My external ip: ", ip
   
-  let id = getIdByName(site)
-  renewIP(site, id, ip)
+  for domain in domains:
+    echo "Updateing: ", domain
+    let id = getIdByName(domain)
+    renewIP(domain, id, ip)
 
   printDnsRecords()
 
