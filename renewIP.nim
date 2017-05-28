@@ -59,8 +59,8 @@ when isMainModule:
   echo "My external ip: ", ip
   
   for domain in domains:
-    echo "Updateing: ", domain
-    let id = getIdByName(domain)
+    echo "Updateing: ", domain.strip()
+    let id = getIdByName(domain.strip())
     renewIP(domain, id, ip)
 
   printDnsRecords()
