@@ -4,6 +4,7 @@ import parsecfg
 import strutils
 
 var config = loadConfig("conf.ini")
+const api = "https://api.cloudflare.com/client/v4/zones/"
 
 let email = config.getSectionValue("", "email") 
 let apiKey = config.getSectionValue("", "apiKey") 
@@ -17,7 +18,7 @@ client.headers = newHttpHeaders({
   })
 
 proc getDnsRecords(): JsonNode = 
-  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body #,  body = $body)
+  let body = client.request(api & zoneKey & "/dns_records", httpMethod = HttpGet).body #,  body = $body)
   let j = parseJson(body)
   return j["result"]
 
@@ -27,7 +28,7 @@ proc getIdByName(name: string): string =
       return entry["id"].getStr()
 
 proc printDnsRecords() =
-  let body = client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records", httpMethod = HttpGet).body
+  let body = client.request(api & zoneKey & "/dns_records", httpMethod = HttpGet).body
   let j = parseJson(body)
   # return j["result"]
   for site in j["result"]:
@@ -45,7 +46,7 @@ proc renewIP(name, id, ip: string) =
     "proxied":false
   }
  
-  discard repr client.request("https://api.cloudflare.com/client/v4/zones/" & zoneKey & "/dns_records/" & id, httpMethod = HttpPut, body = $body)
+  discard repr client.request(api & zoneKey & "/dns_records/" & id, httpMethod = HttpPut, body = $body)
   # TODO: Check if update succesful ;)
 
 when isMainModule:
