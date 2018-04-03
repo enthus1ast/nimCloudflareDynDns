@@ -27,6 +27,7 @@ proc getExternalIP*(sites: seq[string]): string =
 
 when isMainModule:
   var sites = @[
+    "http://ip.code0.xyz",
     "http://ipecho.net/plain", 
     "https://www.iplocation.net/find-ip-address",
     "https://api.ipify.org/?format=json",
