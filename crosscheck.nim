@@ -15,15 +15,16 @@ proc checkSites(sites: seq[string]): Future[seq[seq[string]]] {.async.} =
     except:
       echo "broken: ", site
 
-
 proc getExternalIP*(sites: seq[string]): string = 
   var sitess = waitFor checkSites(sites)
   var sitecount = newCountTable[string]();
   for sitesAr in sitess:
     for site in sitesAr.deduplicate():
       sitecount.inc(site)
-
   return sitecount.largest[0]
+
+# proc getExternalIP6*(sites: seq[string]): string = 
+#   discard
 
 when isMainModule:
   var sites = @[
