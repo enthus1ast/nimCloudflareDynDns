@@ -2,13 +2,15 @@ import ipParser
 import asyncdispatch, httpclient
 import sequtils
 import tables
+import strutils
 
 var client = newAsyncHttpClient()
 
 proc checkSites(sites: seq[string]): Future[seq[seq[string]]] {.async.} =
   var buf: string = ""
   result = @[]
-  for site in sites:
+  for siteRaw in sites:
+    let site = siteRaw.strip()
     buf = await client.getContent(site)
     try:
       result.add(toSeq(buf.parseIps()))
@@ -16,7 +18,7 @@ proc checkSites(sites: seq[string]): Future[seq[seq[string]]] {.async.} =
       echo "broken: ", site
 
 
-proc getExternalIP*(sites: seq[string]): string = 
+proc getExternalIP*(sites: seq[string]): string =
   var sitess = waitFor checkSites(sites)
   var sitecount = newCountTable[string]();
   for sitesAr in sitess:
@@ -27,7 +29,7 @@ proc getExternalIP*(sites: seq[string]): string =
 
 when isMainModule:
   var sites = @[
-    "http://ipecho.net/plain", 
+    "http://ipecho.net/plain",
     "https://www.iplocation.net/find-ip-address",
     "https://api.ipify.org/?format=json",
     "http://ip.42.pl/raw",
