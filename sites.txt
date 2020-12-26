@@ -1,5 +1,6 @@
-http://ipecho.net/plain 
+http://ip.code0.xyz
+http://ipecho.net/plain
 https://www.iplocation.net/find-ip-address
 https://api.ipify.org/?format=json
 http://ip.42.pl/raw
-https://duckduckgo.com/?q=whats+my+ip&ia=answer	
+https://duckduckgo.com/?q=whats+my+ip&ia=answer
