@@ -1,0 +1,6 @@
+[Unit]
+Description=renew dynamic ip via cloudflare
+
+[Service]
+ExecStart=/root/nimCloudflareDynDns/renewIP
+WorkingDirectory=/root/nimCloudflareDynDns/

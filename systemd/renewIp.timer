@@ -1,0 +1,8 @@
+[Unit]
+Description=renew dynamic ip via cloudflare every few minutes
+
+[Timer]
+OnCalendar=*:0/15
+
+[Install]
+WantedBy=timers.target
