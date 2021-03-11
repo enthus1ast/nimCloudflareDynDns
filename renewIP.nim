@@ -62,7 +62,7 @@ proc main() {.async.} =
   echo "My external ip: ", ip
   
   for domain in domains:
-    echo "Updateing: ", domain
+    echo "Updating: ", domain
     let id = await getIdByName(domain)
     await renewIP(domain, id, ip)
 
